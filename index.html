@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+CAO VAN HOANG - Lottery AI Manager
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+<h1>
+🎲 DỰ ĐOÁN KẾT QUẢ XỔ SỐ
+</h1>
+
+
+<p>
+Lottery AI Manager - Phân tích dữ liệu lịch sử
+</p>
+
+
+</header>
+
+
+
+
+
+<!-- THANH CHỨC NĂNG -->
+
+<div class="toolbar">
+
+
+
+<button id="btnRandom">
+
+🎲 Quay kỳ tiếp theo
+
+</button>
+
+
+
+
+<button id="btnAdd">
+
+➕ Thêm kỳ quay
+
+</button>
+
+
+
+
+<button id="btnAI">
+
+🤖 AI Dự đoán
+
+</button>
+
+
+
+
+<button id="btnImport">
+
+📥 Import
+
+</button>
+
+
+
+
+<button id="btnStatistic">
+
+📊 Thống kê
+
+</button>
+
+
+
+
+<button id="btnClear">
+
+🗑 Xóa dữ liệu
+
+</button>
+
+
+
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="Tìm theo ngày hoặc số..."
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- KHỐI AI -->
+
+<div class="ai-box">
+
+
+<h2>
+
+🤖 AI PHÂN TÍCH DỮ LIỆU
+
+</h2>
+
+
+
+
+<div class="ai-content">
+
+
+
+
+
+<div class="ai-item">
+
+🔥 Số mạnh:
+
+<strong id="hotNumbers">
+
+Chưa có dữ liệu
+
+</strong>
+
+</div>
+
+
+
+
+
+
+
+<div class="ai-item">
+
+❄️ Số lâu chưa về:
+
+<strong id="coldNumbers">
+
+Chưa có dữ liệu
+
+</strong>
+
+</div>
+
+
+
+
+
+
+
+<div class="ai-item">
+
+⭐ Bộ số AI đề xuất:
+
+<strong id="aiSuggest">
+
+Chưa quay
+
+</strong>
+
+</div>
+
+
+
+
+
+
+
+<div class="ai-item">
+
+📈 Điểm AI:
+
+<strong id="aiScore">
+
+0/100
+
+</strong>
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- DANH SÁCH -->
+
+<div id="resultList">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- POPUP THÊM -->
+
+<div class="popup" id="popupAdd">
+
+
+<div class="popup-content">
+
+
+<h2>
+➕ Thêm kỳ quay
+</h2>
+
+
+
+<label>
+Ngày
+</label>
+
+
+<input 
+type="date"
+id="date"
+>
+
+
+
+
+<label>
+Giờ
+</label>
+
+
+<input
+
+type="text"
+
+id="time"
+
+placeholder="13H"
+
+>
+
+
+
+
+<label>
+5 số chính
+</label>
+
+
+
+<div class="number-inputs">
+
+
+<input maxlength="2" id="n1">
+
+<input maxlength="2" id="n2">
+
+<input maxlength="2" id="n3">
+
+<input maxlength="2" id="n4">
+
+<input maxlength="2" id="n5">
+
+
+</div>
+
+
+
+
+
+<label>
+⭐ Số đặc biệt (01-12)
+</label>
+
+
+<input
+
+maxlength="2"
+
+id="special"
+
+>
+
+
+
+
+<label>
+Jackpot
+</label>
+
+
+<input
+
+id="jackpot"
+
+placeholder="7000000000"
+
+>
+
+
+
+
+
+<div class="popup-buttons">
+
+
+
+<button id="saveLottery">
+
+💾 Lưu
+
+</button>
+
+
+
+
+<button id="closePopup">
+
+Đóng
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- POPUP QUAY AI -->
+
+<div class="popup" id="popupRandom">
+
+
+
+<div class="popup-content">
+
+
+<h2>
+
+🎲 AI QUAY SỐ
+
+</h2>
+
+
+
+
+
+<div id="randomBalls">
+
+
+
+<div class="ball">
+00
+</div>
+
+
+<div class="ball">
+00
+</div>
+
+
+<div class="ball">
+00
+</div>
+
+
+<div class="ball">
+00
+</div>
+
+
+<div class="ball">
+00
+</div>
+
+
+<div class="ball special">
+00
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="popup-buttons">
+
+
+
+<button id="startRandom">
+
+🎲 Bắt đầu quay
+
+</button>
+
+
+
+
+
+<button id="saveRandom">
+
+💾 Lưu kết quả
+
+</button>
+
+
+
+
+
+<button id="closeRandom">
+
+Đóng
+
+</button>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- FILE IMPORT -->
+
+<input
+
+type="file"
+
+id="importFile"
+
+accept=".txt"
+
+style="display:none"
+
+>
+
+
+
+
+
+
+
+
+
+<!-- XÁC NHẬN XÓA -->
+
+<div id="confirmModal" class="confirm-modal">
+
+
+
+<div class="confirm-box">
+
+
+
+<div class="confirm-icon">
+
+⚠️
+
+</div>
+
+
+
+<h2>
+
+Xác nhận
+
+</h2>
+
+
+
+
+<p id="confirmText">
+
+Bạn có chắc chắn muốn xóa?
+
+</p>
+
+
+
+
+<div class="confirm-buttons">
+
+
+
+<button id="confirmCancel">
+
+Hủy
+
+</button>
+
+
+
+
+<button id="confirmOk">
+
+Xóa
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+© 2026 Bản quyền thuộc về
+
+
+<strong>
+CAO VAN HOANG
+</strong>
+
+
+|
+
+Lottery AI Manager v2.0
+
+
+</footer>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
+
+<script src="script.js"></script>
+
+
+
+</body>
+
+</html>
